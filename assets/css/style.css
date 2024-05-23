@@ -2,10 +2,16 @@
 :root {
   --main-font: "Pretendard";
 
-  --primary-color: #3692FF;
+  --banner-bg: #CFE5FF;
+
+  --primary: #3692FF;
+  --primary-hover: #1967D6;
+  --primary-visited: #1251AA;
+
   --error: #F74747;
   --white: #fff;
   --black: #000;
+
   --gray900: #111827;
   --gray800: #1F2937;
   --gray700: #374151;
@@ -46,23 +52,23 @@ header {
 }
 
 .btn-primary {
-  background: #3692FF;
-  color: #fff;
+  background: var(--primary);
+  color: var(--white);
 }
 
 .btn-primary:hover {
-  background: #1967D6;
-  color: #fff;
+  background: var(--primary-hover);
+  color: var(--white);
 }
 
 .btn-primary:visited {
-  background: #1251AA;
-  color: #fff;
+  background: var(--primary-visited);
+  color: var(--white);
 }
 
 .btn-primary:disabled {
-  background: #9CA3AF;
-  color: #fff;
+  background: var(--gray400);
+  color: var(--white);
 }
 
 .btn-sm {
@@ -94,8 +100,7 @@ header {
   height: 540px;
   display: flex;
   align-items: center;
-  background-color: #CFE5FF;
-
+  background-color: var(--banner-bg);
 }
 
 .main-banner .banner-background {
@@ -132,9 +137,6 @@ header {
   margin-top: 30px;
 }
 
-
-
-
 .section-list {
   width: 100%;
   max-width: 1200px;
@@ -159,13 +161,13 @@ header {
 }
 
 .section-text .label {
-  color: #3692FF;
+  color: var(--primary);
   font-size: 18px;
   font-weight: 700;
 }
 
 .section-text .title {
-  color: #374151;
+  color: var(--gray700);
   font-size: 40px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -173,7 +175,7 @@ header {
 }
 
 .section-text .description {
-  color: #374151;
+  color: var(--gray700);
   font-size: 24px;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -189,7 +191,7 @@ header {
   height: 540px;
   display: flex;
   align-items: center;
-  background-color: #CFE5FF;
+  background-color: var(--banner-bg);
 
 }
 
@@ -210,7 +212,7 @@ header {
 
 /* footer */
 footer {
-  background: #111827;
+  background: var(--gray900);
   color: #fff;
   height: 160px;
 
@@ -226,7 +228,7 @@ footer {
 }
 
 .copyright {
-  color: #9CA3AF;
+  color: var(--gray400);
   font-weight: 400;
 }
 
