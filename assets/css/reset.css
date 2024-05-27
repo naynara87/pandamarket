@@ -49,6 +49,21 @@ textarea {
   font-family: var(--main-font), sans-serif;
 }
 
+button {
+  width: 100%;
+  cursor: pointer;
+  border: 0;
+}
+
+fieldset {
+  border: 0;
+}
+
+input {
+  border: 0;
+  outline: 0;
+}
+
 /* 링크 초기화 */
 a,
 a:hover,
