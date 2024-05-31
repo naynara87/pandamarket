@@ -24,10 +24,10 @@
 - [x] palette에 있는 color값들을 css 변수로 등록하고 사용해 주세요.
 
 ## 주요 변경사항
-
--
--
-
+```
+//scss 변환
+sass assets/scss/style.scss assets/css/style.css
+```
 ## 스크린샷
 
 ![메인](./readmeSource/main.png)
