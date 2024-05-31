@@ -3,7 +3,7 @@
 사이트주소: https://pandamarket-momo.netlify.app/
 
 ## 요구사항
-- [x] Github에 PR(Pull Request)을 만들어서 미션을 제출합니다.
+- [ ] Github에 PR(Pull Request)을 만들어서 미션을 제출합니다.
 - [x] 피그마 디자인에 맞게 페이지를 만들어 주세요.
 - [x] React와 같은 UI 라이브러리를 사용하지 않고 진행합니다.
 - [x] Netlify에 파일 배포가 아닌 포크한 Github 레포지토리로 연결합니다.
@@ -25,12 +25,8 @@
 
 ## 주요 변경사항
 
-```
-//sass 설정
-sass assets/scss/style.scss assets/css/style.css
-```
-
-
+-
+-
 
 ## 스크린샷
 
@@ -40,4 +36,6 @@ sass assets/scss/style.scss assets/css/style.css
 
 ## 멘토에게
 
+-
+-
 - 셀프 코드 리뷰를 통해 질문 이어가겠습니다.
