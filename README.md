@@ -38,10 +38,10 @@ sass --watch assets/scss/style.scss assets/css/style.css
 ```
 ## 스크린샷
 
-![메인](./readmeSource/main.png)
-![로그인](./readmeSource/login.png)
-![회원가입](./readmeSource/signup.png)
+![반응형](./readmeSource/responsive.png)
+![썸네일](./readmeSource/thumb.png) 
 
 ## 멘토에게
 
+- 셀프 코드 리뷰를 통해 질문 이어가겠습니다.
 - 셀프 코드 리뷰를 통해 질문 이어가겠습니다.

@@ -662,7 +662,7 @@ footer {
   }
   .sub-banner .banner-background {
     background-position: bottom center;
-    background-size: 105%;
+    background-size: min(105%, 630px);
   }
   .sub-banner .banner-text {
     width: 100%;
