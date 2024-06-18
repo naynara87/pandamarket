@@ -10,15 +10,16 @@ export const VALIDATE_LIST = Object.freeze({
 // 유효값에 대한 정의
 export const validate = {
   errorPlacement: function (e, message) {
-    const inputFormDiv = e.parentNode;
-    const errorDiv = inputFormDiv.querySelector('.error-message');
-    if (!errorDiv) {
-      errorDiv = document.createElement('div');
-      errorDiv.classList.add('error-message');
+    let errorDiv = e.nextElementSibling;
+    const hasError = errorDiv && errorDiv.classList.contains('error-message');
+    if (hasError) {
+      errorDiv.innerHTML = message;
+      return
     }
+    errorDiv = document.createElement('div');
+    errorDiv.classList.add('error-message');
     errorDiv.innerHTML = message;
-    inputFormDiv.appendChild(errorDiv);
-
+    e.parentNode.insertBefore(errorDiv, e.nextSibling);
   },
   showError: function (e, message) {
     const inputFormDiv = e.parentNode;
@@ -28,14 +29,13 @@ export const validate = {
     this.errorPlacement(e, message);
   },
   success: function (e) {
-    const inputFormDiv = e.parentNode;
-    const errorDiv = inputFormDiv.querySelector('.error-message');
     e.classList.remove('error-border');
-    if (errorDiv) {
-      errorDiv.remove();
-    }
-    inputFormDiv.classList.add('valid');
+    e.parentNode.classList.add('valid');
     e.dataset.valid = 'true';
+    const errorDiv = e.nextElementSibling;
+    if (errorDiv && errorDiv.classList.contains('error-message')) {
+      errorDiv.innerHTML = '';
+    }
   },
   messages: {
     [VALIDATE_LIST.EMAIL]: {
