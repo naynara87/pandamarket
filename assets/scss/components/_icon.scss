@@ -1,4 +1,19 @@
 /* ==== icon ==== */
+i.icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+i.icon-sm {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 .ic_instagram {
   background-image: url('../img/ic_instagram.svg');
@@ -32,10 +47,14 @@
   background-image: url('../img/btn_visibility_off.svg');
 }
 
-i.icon {
-  display: block;
-  width: 24px;
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
+.ic_search {
+  background-image: url('../img/ic_search.svg');
+}
+
+.ic_arrow_down {
+  background-image: url('../img/ic_arrow_down.svg');
+}
+
+.ic_heart {
+  background-image: url('../img/ic_heart.svg');
 }

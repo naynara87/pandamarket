@@ -1,17 +1,3 @@
-// base 
-@import 'fonts';
-@import 'reset';
-@import 'variables';
-
-// layout 
-@import 'header';
-@import 'main';
-@import 'footer';
-
-// components 
-@import 'form';
-@import 'button';
-@import 'icon';
-
-// 반응형
-@import 'responsive';
+@use 'base';
+@use 'layout';
+@use 'components';
