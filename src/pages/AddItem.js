@@ -1,6 +1,7 @@
+import './AddItem.scss';
+
 function AddItem() {
-  return (<>
-  </>);
+  return <></>;
 }
 
 export default AddItem;
