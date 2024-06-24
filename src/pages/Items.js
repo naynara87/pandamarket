@@ -1,10 +1,11 @@
-import Header from './../layout/Header'; 
-import ItemMain from './../layout/ItemMain'; 
+import Header from './../layout/Header';
+import ItemMain from './../layout/ItemMain';
+import './Items.scss';
 
 function Items() {
   return (
     <>
-      <Header />  
+      <Header />
       <ItemMain />
     </>
   );
