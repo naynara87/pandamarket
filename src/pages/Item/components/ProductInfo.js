@@ -1,15 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
-import ImgDefault from '../../../assets/img/img-default.png';
+import React from "react";
+import { useState } from "react";
+import ImgDefault from "../../../assets/img/img-default.png";
 
 function ProductInfo({ product }) {
   const { images, name, price, description, tags, favoriteCount } = product;
   const [isFavorite, setIsFavorite] = useState(false);
 
   const toggleFavorite = () => {
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
   };
-  const ImgError = event => {
+  const ImgError = (event) => {
     event.target.src = ImgDefault;
   };
 
@@ -22,8 +22,7 @@ function ProductInfo({ product }) {
         <div className="product-info-header">
           <div className="title">{name}</div>
           <div className="price">
-            {' '}
-            <div className="price">{price.toLocaleString()}원</div>원
+            <div className="price">{price.toLocaleString()}원</div>
           </div>
         </div>
         <div className="product-info-body">
@@ -36,7 +35,10 @@ function ProductInfo({ product }) {
             ))}
           </div>
         </div>
-        <button className={`btn-favorite ${isFavorite ? 'on' : ''}`} onClick={toggleFavorite}>
+        <button
+          className={`btn-favorite ${isFavorite ? "on" : ""}`}
+          onClick={toggleFavorite}
+        >
           <i className="icon ic_heart"></i>
           {favoriteCount}
         </button>
