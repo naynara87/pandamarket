@@ -1,70 +1,74 @@
-import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { useState, useMemo, useCallback } from 'react';
 import './AddItem.scss';
-import Header from './../layout/Header';
-import FileInput from './../components/FileInput';
-import TagInput from '../components/TagInput';
+import Header from '../../layout/Header';
+import FileInput from '../../components/form/FileInput';
+import TagInput from '../../components/form/TagInput';
 
-function AddItem() {
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [values, setValues] = useState({
-    imgFile: '',
-    product: '',
-    content: '',
-    price: 0,
-    tag: [],
-  });
+const INITIAL_VALUES = {
+  imgFile: null,
+  product: '',
+  content: '',
+  price: 0,
+  tag: [],
+};
+
+const AddItem = () => {
+  const [values, setValues] = useState(INITIAL_VALUES);
   const [resetTagInput, setResetTagInput] = useState(false);
 
-  const handleChange = (name, value) => {
-    const updatedValues = { ...values, [name]: value };
-    setValues(updatedValues);
-
-    const { product, content, price, tag } = updatedValues;
-    if (product !== '' && content !== '' && price !== 0 && tag.length > 0) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
+  const resetForm = () => {
+    setValues(INITIAL_VALUES);
+    setResetTagInput(true);
   };
+
+  const isFormValid = useMemo(() => {
+    const { product, content, price, tag } = values;
+    return product.trim() !== '' && content.trim() !== '' && price !== 0 && tag.length > 0;
+  }, [values]);
+
+  const handleChange = useCallback((name, value) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  }, []);
 
   const handleInputChange = e => {
     const { name, value, type } = e.target;
     handleChange(name, type === 'file' ? e.target.files[0] : value);
   };
 
-  const handleTagListChange = tagList => {
-    handleChange('tag', tagList);
-  };
+  const handleTagListChange = useCallback(
+    tagList => {
+      handleChange('tag', tagList);
+    },
+    [handleChange],
+  );
 
+  const handleFormKeyDown = event => {
+    // textarea 안에서는 Enter 키를 허용
+    if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
+      event.preventDefault();
+    }
+  };
   const handleSubmit = e => {
     e.preventDefault();
+    e.stopPropagation();
     alert('등록되었습니다');
     console.log(values);
-
-    // 폼 데이터 초기화
-    setValues({
-      imgFile: '',
-      product: '',
-      content: '',
-      price: 0,
-      tag: [],
-    });
-    setIsFormValid(false);
-    setResetTagInput(true);
+    resetForm();
   };
-
-  useEffect(() => {
-    if (resetTagInput) {
-      setResetTagInput(false);
-    }
-  }, [resetTagInput]);
 
   return (
     <>
+      <Helmet>
+        <title>판다마켓 - 상품 등록</title>
+      </Helmet>
       <Header />
       <main className="main-top">
         <section className="product-register-wrap">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} onKeyDown={handleFormKeyDown}>
             <div className="section-header">
               <h2 className="title">상품 등록하기</h2>
               <button className="btn-primary btn-sm" type="submit" disabled={!isFormValid}>
@@ -113,6 +117,6 @@ function AddItem() {
       </main>
     </>
   );
-}
+};
 
 export default AddItem;
