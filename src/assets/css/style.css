@@ -449,6 +449,7 @@ footer {
     padding: 0 16px;
   }
   header .header-wrap .nav li {
+    font-size: 16px;
     padding: 0 8px;
   }
   .logo {
@@ -533,7 +534,7 @@ footer {
     grid-area: sns;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .logo {
     background: url("../img/sm-logo.svg") no-repeat;
     width: 40px;
@@ -543,6 +544,7 @@ footer {
 /* ==== button ==== */
 .btn-sm {
   display: flex;
+  width: auto;
   min-width: 88px;
   height: 48px;
   font-size: 16px;
@@ -578,6 +580,38 @@ footer {
 .btn-primary:disabled {
   background: var(--gray400);
   color: var(--white);
+}
+
+.btn-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url("../img/profile.png") no-repeat;
+}
+
+.btn-favorite {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--gray200);
+  background: var(--white);
+  border-radius: 2em;
+  padding: 0.5em 1em;
+  font-size: 16px;
+  color: var(--gray500);
+  transition: 0.2s ease;
+}
+.btn-favorite:hover {
+  background: var(--gray100);
+  color: var(--gray600);
+}
+.btn-favorite:hover .ic_heart {
+  background-image: url("../img/ic_heart_fill.svg");
+}
+.btn-favorite.on .ic_heart {
+  background-image: url("../img/ic_heart_fill.svg");
 }
 
 .product-wrap {
@@ -1060,11 +1094,19 @@ i.icon-sm {
 }
 
 /* ==== loadingbar ==== */
+.bg-dark {
+  background: var(--gray100);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
 .load-wrapp {
   width: 100px;
   height: 100px;
-  margin: 60px auto;
-  padding: 20px 20px 20px;
+  margin: 0 auto;
+  padding: 80px 20px 140px;
   text-align: center;
 }
 .load-wrapp .load {
