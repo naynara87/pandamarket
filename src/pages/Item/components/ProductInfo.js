@@ -22,7 +22,6 @@ function ProductInfo({ product }) {
         <div className="product-info-header">
           <div className="title">{name}</div>
           <div className="price">
-            {" "}
             <div className="price">{price.toLocaleString()}원</div>
           </div>
         </div>
