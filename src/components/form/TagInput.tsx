@@ -1,15 +1,41 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+} from "react";
 
-const TagInput = ({ label, onTagListChange, reset }) => {
-  const [tagInputValue, setTagInputValue] = useState("");
-  const [tagList, setTagList] = useState([]);
+// Tag 타입 정의
+interface Tag {
+  id: number;
+  name: string;
+}
+
+interface TagInputProps {
+  label: string;
+  name: string;
+  value: Tag[]; // Ensure this matches the expected type
+  onTagListChange: (tags: Tag[]) => void; // Ensure this matches the expected type
+  reset?: boolean;
+  placeholder?: string;
+}
+
+const TagInput: React.FC<TagInputProps> = ({
+  label,
+  onTagListChange,
+  reset,
+}) => {
+  const [tagInputValue, setTagInputValue] = useState<string>("");
+  const [tagList, setTagList] = useState<Tag[]>([]);
 
   const handleKeyPress = useCallback(
-    (e) => {
+    (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter" && tagInputValue.trim()) {
         e.preventDefault();
         const newTagName = tagInputValue.trim();
-        const newTag = {
+        const newTag: Tag = {
           id: Date.now(),
           name: newTagName,
         };
@@ -23,7 +49,7 @@ const TagInput = ({ label, onTagListChange, reset }) => {
   );
 
   const handleTagRemove = useCallback(
-    (tagIdToRemove) => {
+    (tagIdToRemove: number) => {
       setTagList((prevTagList) => {
         const updatedList = prevTagList.filter(
           (tag) => tag.id !== tagIdToRemove
@@ -50,7 +76,9 @@ const TagInput = ({ label, onTagListChange, reset }) => {
           type="text"
           placeholder="태그를 입력 후 Enter를 눌러 추가하세요"
           value={tagInputValue}
-          onChange={(e) => setTagInputValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTagInputValue(e.target.value)
+          }
           onKeyUp={handleKeyPress}
         />
         {tagList.length > 0 && (
@@ -60,7 +88,11 @@ const TagInput = ({ label, onTagListChange, reset }) => {
                 {tag.name}{" "}
                 <i
                   className="icon ic_remove"
-                  onClick={() => handleTagRemove(tag.id)}
+                  onClick={(e: MouseEvent<HTMLElement>) =>
+                    handleTagRemove(tag.id)
+                  }
+                  role="button"
+                  aria-label="태그 제거 버튼"
                 ></i>
               </span>
             ))}
