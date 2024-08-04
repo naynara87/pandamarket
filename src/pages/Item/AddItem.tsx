@@ -1,5 +1,12 @@
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  ChangeEvent,
+  KeyboardEvent,
+  FormEvent,
+} from "react";
 import { Helmet } from "react-helmet";
-import { useState, useMemo, useCallback } from "react";
 import "./AddItem.scss";
 import Header from "../../layout/Header";
 import FileInput from "../../components/form/FileInput";
@@ -8,7 +15,20 @@ import TextInput from "../../components/form/TextInput";
 import TextArea from "../../components/form/TextArea";
 import NumberInput from "../../components/form/NumberInput";
 
-const INITIAL_VALUES = {
+interface Tag {
+  id: string;
+  name: string;
+}
+
+interface FormValues {
+  imgFile: File | null;
+  product: string;
+  content: string;
+  price: number;
+  tag: Tag[];
+}
+
+const INITIAL_VALUES: FormValues = {
   imgFile: null,
   product: "",
   content: "",
@@ -16,9 +36,9 @@ const INITIAL_VALUES = {
   tag: [],
 };
 
-const AddItem = () => {
-  const [values, setValues] = useState(INITIAL_VALUES);
-  const [resetTagInput, setResetTagInput] = useState(false);
+const AddItem: React.FC = () => {
+  const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
+  const [resetTagInput, setResetTagInput] = useState<boolean>(false);
 
   const resetForm = () => {
     setValues(INITIAL_VALUES);
@@ -30,38 +50,48 @@ const AddItem = () => {
     return (
       product.trim() !== "" &&
       content.trim() !== "" &&
-      price !== 0 &&
+      price > 0 &&
       tag.length > 0
     );
   }, [values]);
 
-  const handleChange = useCallback((name, value) => {
+  const handleChange = useCallback((name: string, value: unknown) => {
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
-    handleChange(name, type === "file" ? e.target.files[0] : value);
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type, files } = e.target;
+
+    if (type === "file" && files && files.length > 0) {
+      handleChange(name, files[0]);
+    } else {
+      handleChange(name, value);
+    }
   };
 
   const handleTagListChange = useCallback(
-    (tagList) => {
+    (tagList: Tag[]) => {
       handleChange("tag", tagList);
     },
     [handleChange]
   );
 
-  const handleFormKeyDown = (event) => {
+  const handleFormKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
     // textarea 안에서는 Enter 키를 허용
-    if (event.key === "Enter" && event.target.tagName !== "TEXTAREA") {
+    if (
+      event.key === "Enter" &&
+      (event.target as HTMLElement).tagName !== "TEXTAREA"
+    ) {
       event.preventDefault();
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
     alert("등록되었습니다");
@@ -107,7 +137,7 @@ const AddItem = () => {
               value={values.content}
               onChange={handleInputChange}
               placeholder="상품 소개를 입력해주세요"
-              rows="10"
+              rows={10}
             />
             <NumberInput
               label="판매가격"

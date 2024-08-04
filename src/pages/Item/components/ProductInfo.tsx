@@ -1,16 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import ImgDefault from "../../../assets/img/img-default.png";
+import { Product } from "../../../types/productTypes";
+interface ProductInfoProps {
+  product: Product;
+}
 
-function ProductInfo({ product }) {
+const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   const { images, name, price, description, tags, favoriteCount } = product;
   const [isFavorite, setIsFavorite] = useState(false);
 
   const toggleFavorite = () => {
     setIsFavorite((prevState) => !prevState);
   };
-  const ImgError = (event) => {
-    event.target.src = ImgDefault;
+  const ImgError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = ImgDefault;
   };
 
   return (
@@ -45,6 +49,6 @@ function ProductInfo({ product }) {
       </div>
     </section>
   );
-}
+};
 
 export default ProductInfo;

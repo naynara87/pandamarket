@@ -1,15 +1,27 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../services/api";
+import { Product, UseProductsReturn } from "../types/productTypes";
 
-const useProducts = (initialOrderBy, getPageSize) => {
-  const [orderBy, setOrderBy] = useState(initialOrderBy);
-  const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(getPageSize());
-  const [totalPageNum, setTotalPageNum] = useState(0);
-  const [loading, setLoading] = useState(false);
+const useProducts = (
+  initialOrderBy: string,
+  getPageSize: () => number
+): UseProductsReturn => {
+  const [orderBy, setOrderBy] = useState<string>(initialOrderBy);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(getPageSize());
+  const [totalPageNum, setTotalPageNum] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleLoad = async ({ orderBy, page, pageSize }) => {
+  const handleLoad = async ({
+    orderBy,
+    page,
+    pageSize,
+  }: {
+    orderBy: string;
+    page: number;
+    pageSize: number;
+  }) => {
     setLoading(true);
     try {
       const products = await getProducts({ orderBy, page, pageSize });

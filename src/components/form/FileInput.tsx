@@ -1,20 +1,32 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ChangeEvent, MouseEvent } from "react";
 import inputImg from "../../assets/img/product/sample2.png";
 
-function FileInput({ label, name, value, onChange }) {
-  const [preview, setPreview] = useState(value || inputImg);
-  const inputRef = useRef();
-  const [isBoxVisible, setIsBoxVisible] = useState(null);
+// Props 타입 정의
+interface FileInputProps {
+  label: string;
+  name: string;
+  value: File | null; // File 객체 또는 null
+  onChange: (name: string, file: File | null) => void; // 파일 변경 시 호출되는 콜백 함수
+}
 
-  const handleChange = (e) => {
-    const file = e.target.files[0];
+function FileInput({ label, name, value, onChange }: FileInputProps) {
+  const [preview, setPreview] = useState<string>(
+    value ? URL.createObjectURL(value) : inputImg
+  );
+  const [isBoxVisible, setIsBoxVisible] = useState<boolean>(!!value);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
 
     if (file) {
       onChange(name, file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result);
-        setIsBoxVisible(true);
+        if (reader.result) {
+          setPreview(reader.result as string);
+          setIsBoxVisible(true);
+        }
       };
       reader.readAsDataURL(file);
     } else {
@@ -24,10 +36,15 @@ function FileInput({ label, name, value, onChange }) {
     }
   };
 
-  const handleRemove = () => {
+  const handleRemove = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault(); // 클릭 이벤트가 다른 동작을 트리거하지 않도록 방지
     onChange(name, null);
     setPreview(inputImg);
     setIsBoxVisible(false);
+  };
+
+  const handleImageError = () => {
+    setPreview(inputImg);
   };
 
   useEffect(() => {
@@ -39,10 +56,6 @@ function FileInput({ label, name, value, onChange }) {
       setIsBoxVisible(false);
     }
   }, [value]);
-
-  const handleImageError = () => {
-    setPreview(inputImg);
-  };
 
   return (
     <div className="input-group">

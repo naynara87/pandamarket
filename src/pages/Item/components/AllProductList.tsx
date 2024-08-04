@@ -5,18 +5,21 @@ import Loadingbar from "../../../components/ui/Loadingbar";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Link, useNavigate } from "react-router-dom";
 import useProducts from "../../../hooks/useProductList";
+import { Product } from "../../../types/productTypes";
 
-const getPageSize = () => {
+// 페이지 크기를 결정하는 함수
+const getPageSize = (): number => {
   const width = window.innerWidth;
-  switch (true) {
-    case width < 1200:
-      return 5;
-    default:
-      return 10;
-  }
+  return width < 1200 ? 5 : 10;
 };
 
-const SORT_MENU_INFO = {
+// 정렬 메뉴 정보 타입
+interface SortMenuInfo {
+  label: string;
+  orderLabel: string;
+}
+
+const SORT_MENU_INFO: Record<string, SortMenuInfo> = {
   RECENT: {
     label: "최신순",
     orderLabel: "recent",
@@ -26,6 +29,17 @@ const SORT_MENU_INFO = {
     orderLabel: "favorite",
   },
 };
+
+// useProducts 훅의 반환 타입
+interface UseProductsReturn {
+  orderBy: string;
+  setOrderBy: (order: string) => void;
+  products: Product[];
+  page: number;
+  setPage: (pageNumber: number) => void;
+  totalPageNum: number;
+  loading: boolean;
+}
 
 function AllProductList() {
   const navigate = useNavigate();
@@ -37,17 +51,20 @@ function AllProductList() {
     setPage,
     totalPageNum,
     loading,
-  } = useProducts("recent", getPageSize);
+  } = useProducts("recent", getPageSize) as UseProductsReturn;
 
+  // 상품 등록 버튼 클릭 핸들러
   const handleClickAddItemButton = () => {
     navigate("/additem");
   };
 
-  const onPageChange = (pageNumber) => {
+  // 페이지 변경 핸들러
+  const onPageChange = (pageNumber: number | undefined) => {
     if (!pageNumber || pageNumber > totalPageNum) return;
     setPage(pageNumber);
   };
 
+  // 제품 리스트 렌더링
   const ProductList =
     products.length > 0 ? (
       <ul className="product-list">
@@ -71,7 +88,7 @@ function AllProductList() {
           type="text"
           className="search"
           placeholder="검색할 상품을 입력해주세요"
-        ></input>
+        />
         <button
           onClick={handleClickAddItemButton}
           className="btn-primary btn-sm btn-add"
