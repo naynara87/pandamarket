@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getInquery } from "./../services/api";
+import { getInquery } from "../services/api";
 import {
   Inquiry,
   InqueryResponse,

@@ -36,7 +36,7 @@ const INITIAL_VALUES: FormValues = {
   tag: [],
 };
 
-const AddItem: React.FC = () => {
+function AddItem() {
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
   const [resetTagInput, setResetTagInput] = useState<boolean>(false);
 
@@ -65,7 +65,7 @@ const AddItem: React.FC = () => {
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, type, files } = e.target;
+    const { name, value, type, files } = e.target as HTMLInputElement;
 
     if (type === "file" && files && files.length > 0) {
       handleChange(name, files[0]);
@@ -159,6 +159,6 @@ const AddItem: React.FC = () => {
       </main>
     </>
   );
-};
+}
 
 export default AddItem;

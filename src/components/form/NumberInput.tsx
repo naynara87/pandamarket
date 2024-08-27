@@ -9,23 +9,25 @@ interface NumberInputProps {
   placeholder?: string;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({
+function NumberInput({
   label,
   name,
   value,
   onChange,
   placeholder,
-}) => (
-  <div className="input-group">
-    <label>{label}</label>
-    <input
-      type="number"
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-    />
-  </div>
-);
+}: NumberInputProps) {
+  return (
+    <div className="input-group">
+      <label>{label}</label>
+      <input
+        type="number"
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+}
 
 export default NumberInput;
