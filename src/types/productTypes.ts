@@ -3,12 +3,12 @@
 // 기존 Product 타입
 export interface Product {
   id: string;
-  images: string[];
   name: string;
   price: number;
-  description: string;
-  tags: string[];
-  favoriteCount: number;
+  images?: string[];
+  description?: string;
+  tags?: string[];
+  favoriteCount?: number;
 }
 
 // 기존 UseProductIdReturn 타입

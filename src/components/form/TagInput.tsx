@@ -7,7 +7,6 @@ import React, {
   MouseEvent,
 } from "react";
 
-// Tag 타입 정의
 interface Tag {
   id: number;
   name: string;
@@ -16,17 +15,13 @@ interface Tag {
 interface TagInputProps {
   label: string;
   name: string;
-  value: Tag[]; // Ensure this matches the expected type
-  onTagListChange: (tags: Tag[]) => void; // Ensure this matches the expected type
-  reset?: boolean;
-  placeholder?: string;
+  value: Tag[];
+  onTagListChange: (tagList: Tag[]) => void;
+  reset: boolean;
+  placeholder: string;
 }
 
-const TagInput: React.FC<TagInputProps> = ({
-  label,
-  onTagListChange,
-  reset,
-}) => {
+function TagInput({ label, value, onTagListChange, reset }: TagInputProps) {
   const [tagInputValue, setTagInputValue] = useState<string>("");
   const [tagList, setTagList] = useState<Tag[]>([]);
 
@@ -101,6 +96,6 @@ const TagInput: React.FC<TagInputProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default TagInput;

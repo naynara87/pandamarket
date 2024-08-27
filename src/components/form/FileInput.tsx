@@ -48,13 +48,20 @@ function FileInput({ label, name, value, onChange }: FileInputProps) {
   };
 
   useEffect(() => {
+    let objectUrl: string;
     if (value) {
-      setPreview(URL.createObjectURL(value));
+      objectUrl = URL.createObjectURL(value);
+      setPreview(objectUrl);
       setIsBoxVisible(true);
     } else {
       setPreview(inputImg);
       setIsBoxVisible(false);
     }
+    return () => {
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+    };
   }, [value]);
 
   return (

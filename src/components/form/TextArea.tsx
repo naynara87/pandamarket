@@ -6,7 +6,7 @@ interface TextAreaProps {
   name: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder?: string;
+  placeholder: string;
   rows?: number;
 }
 

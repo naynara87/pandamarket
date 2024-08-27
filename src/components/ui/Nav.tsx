@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-const getLinkStyle = (
-  navProps: { isActive: boolean },
-  pathname: string
-): string => {
-  const isAddItemPage = pathname === "/additem";
-  return navProps.isActive || isAddItemPage ? "nav-link active" : "nav-link";
-};
-
 function Nav() {
   const location = useLocation();
+
+  const getLinkStyle = (
+    navProps: { isActive: boolean },
+    pathname: string
+  ): string => {
+    const isAddItemPage = pathname === "/additem";
+    return navProps.isActive || isAddItemPage ? "nav-link active" : "nav-link";
+  };
 
   return (
     <ul className="nav">
