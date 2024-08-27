@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-helmet": "^6.1.11"
+    "@types/react-helmet": "^6.1.11",
+    "http-proxy-middleware": "^3.0.0"
   }
 }

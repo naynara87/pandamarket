@@ -1,46 +1,26 @@
-# Getting Started with Create React App
+# 스프린트 미션 11
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 기본 요구사항
 
-## Available Scripts
+- [x] Github에 PR(Pull Request)을 만들어서 미션을 제출합니다.
+- [x] 피그마 디자인에 맞게 페이지를 만들어 주세요.
+- [x] 기존의 React, Typescript로 구현한 프로젝트와 별도로 진행합니다.
 
-In the project directory, you can run:
+## 체크리스트 [기본]
 
-### `npm start`
+### 회원가입
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [] 유효한 정보를 입력하고 스웨거 명세된 “/auth/signUp”으로 POST 요청해서 성공 응답을 받으면 회원가입이 완료됩니다.
+- [] 회원가입이 완료되면 “/login”로 이동합니다.
+- [] 각 input의 placeholder 값을 정확히 입력해주세요.
+- [] 회원가입 페이지에 접근시 로컬 스토리지에 accessToken이 있는 경우 ‘/’ 페이지로 이동합니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 로그인
 
-### `npm test`
+- [] 회원가입을 성공한 정보를 입력하고 스웨거 명세된 “/auth/signIp”으로 POST 요청을 하면 로그인이 완료됩니다.
+- [] 로그인이 완료되면 로컬 스토리지에 accessToken을 저장하고 “/” 로 이동합니다.
+- [] 로그인/회원가입 페이지에 접근시 로컬 스토리지에 accessToken이 있는 경우 ‘/’ 페이지로 이동합니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 메인
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [] 로컬 스토리지에 accessToken이 있는 경우 상단바 ‘로그인’ 버튼이 판다 이미지로 바뀝니다.
